@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NYBSJ Admin Portal — Mockup</title>
+  <link rel="icon" href="https://nybsj.com/application/files/8317/5467/7327/favicon.ico" />
+  <style>
+    :root {
+      --navy: #0f2e4a;
+      --navy-soft: #1a3d5c;
+      --cyan: #1c8a98;
+      --cyan-bright: #2bb8c9;
+      --bg: #ffffff;
+      --surface: #f7f9fb;
+      --surface-2: #eef2f6;
+      --border: #d9e1e8;
+      --text: #0f2e4a;
+      --text-soft: #4a5b6e;
+      --text-muted: #7a8a9a;
+      --danger: #c04030;
+      --success: #2a8a4a;
+      --warn-bg: #fff7e6;
+      --warn-border: #f0c674;
+      --warn-text: #7a5a10;
+      --pill-new-bg: #e6f4f7;
+      --pill-new-text: #0d6470;
+      --pill-reviewed-bg: #ebf5ee;
+      --pill-reviewed-text: #1f6a3a;
+      --pill-flagged-bg: #fdecea;
+      --pill-flagged-text: #8a2a1f;
+      --pill-wc-bg: #fff4e6;
+      --pill-wc-text: #8a5a10;
+      --pill-nf-bg: #fde8e8;
+      --pill-nf-text: #8a1f1f;
+      --pill-std-bg: #eaf0f6;
+      --pill-std-text: #2a4a6a;
+      --shadow-sm: 0 1px 2px rgba(15, 46, 74, 0.05);
+      --shadow-md: 0 2px 8px rgba(15, 46, 74, 0.08);
+      --radius: 8px;
+      --radius-sm: 6px;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--surface);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px; line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============ MOCKUP NAV ============ */
+    #mockup-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--navy); color: #fff;
+      padding: 8px 16px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+      font-size: 13px; border-bottom: 1px solid #000;
+    }
+    #mockup-nav .label { opacity: 0.7; margin-right: 4px; }
+    #mockup-nav .group { display: flex; gap: 6px; align-items: center; padding: 0 8px;
+      border-right: 1px solid rgba(255,255,255,0.15); }
+    #mockup-nav .group:last-child { border-right: none; }
+    #mockup-nav button {
+      background: transparent; color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px; padding: 4px 10px;
+      font-size: 12px; cursor: pointer; font-family: inherit;
+    }
+    #mockup-nav button:hover { background: rgba(255,255,255,0.08); }
+    #mockup-nav button.active { background: var(--cyan); border-color: var(--cyan); }
+
+    /* ============ APP CHROME ============ */
+    .app-header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .app-header .brand { display: flex; align-items: center; gap: 12px; }
+    .app-header img { height: 40px; width: auto; }
+    .app-header .brand-text {
+      font-weight: 600; color: var(--navy);
+      font-size: 14px; line-height: 1.2;
+    }
+    .app-header .brand-text small {
+      display: block; font-weight: 500; color: var(--text-muted);
+      font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .app-header .spacer { flex: 1; }
+    .app-header .account {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--surface-2); padding: 6px 12px; border-radius: 999px;
+      font-size: 13px; color: var(--text-soft);
+    }
+    .app-header .account .avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--cyan); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600;
+    }
+    .app-header .account .who { font-weight: 600; color: var(--navy); }
+    .app-header .account .scope { font-size: 11px; color: var(--text-muted); }
+
+    /* ============ SCREEN ROUTING ============ */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    main { padding: 24px; }
+    .container { max-width: 1280px; margin: 0 auto; }
+    .narrow { max-width: 460px; margin: 60px auto; }
+
+    /* ============ TYPOGRAPHY ============ */
+    h1 {
+      font-size: 22px; margin: 0 0 6px;
+      color: var(--navy); font-weight: 600;
+    }
+    h2 {
+      font-size: 16px; margin: 24px 0 10px;
+      color: var(--navy); font-weight: 600;
+    }
+    h3 {
+      font-size: 13px; margin: 0 0 8px;
+      color: var(--text-muted); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    p { margin: 0 0 12px; color: var(--text-soft); }
+    .lead { font-size: 15px; color: var(--text-soft); margin-bottom: 20px; }
+    .muted { color: var(--text-muted); font-size: 13px; }
+
+    /* ============ CARDS ============ */
+    .card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .card.center { text-align: center; }
+    .card + .card { margin-top: 16px; }
+
+    /* ============ FORMS ============ */
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--navy); margin-bottom: 6px;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 10px 12px;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      font-size: 14px; font-family: inherit; color: var(--text);
+      background: #fff;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none; border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(28, 138, 152, 0.15);
+    }
+    .field .hint { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .req { color: var(--danger); }
+
+    /* ============ BUTTONS ============ */
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 18px; border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 600; font-family: inherit;
+      border: 1px solid transparent; cursor: pointer; text-decoration: none;
+    }
+    .btn-block { display: flex; width: 100%; justify-content: center; }
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-primary:hover { background: var(--navy-soft); }
+    .btn-secondary { background: #fff; color: var(--navy); border-color: var(--border); }
+    .btn-secondary:hover { border-color: var(--navy); }
+    .btn-ghost {
+      background: transparent; color: var(--text-soft);
+      border-color: transparent; padding: 6px 10px; font-weight: 500;
+    }
+    .btn-ghost:hover { background: var(--surface-2); color: var(--navy); }
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+
+    /* ============ QUEUE TOOLBAR ============ */
+    .queue-head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap; margin-bottom: 16px;
+    }
+    .queue-head .left h1 { margin-bottom: 4px; }
+    .queue-head .left .meta { font-size: 13px; color: var(--text-muted); }
+
+    .filters {
+      display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 10px 12px;
+      margin-bottom: 16px;
+    }
+    .filters .filter-label {
+      font-size: 12px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin-right: 4px;
+    }
+    .filters select, .filters input {
+      padding: 6px 10px; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); font-size: 13px;
+      font-family: inherit; background: #fff; color: var(--text);
+    }
+    .filters .search { flex: 1; min-width: 200px; }
+    .filters .clear {
+      background: transparent; border: 0; color: var(--cyan);
+      font-size: 13px; cursor: pointer; font-family: inherit;
+    }
+
+    /* ============ SCOPE BANNER (shows what locations admin can see) ============ */
+    .scope-banner {
+      background: var(--warn-bg); border: 1px solid var(--warn-border);
+      color: var(--warn-text);
+      border-radius: var(--radius); padding: 10px 14px;
+      font-size: 13px; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .scope-banner.info {
+      background: #e6f4f7; border-color: #9fd4dc; color: #0d6470;
+    }
+    .scope-banner.info-strong {
+      background: #ebf5ee; border-color: #a8d4b6; color: #1f6a3a;
+    }
+
+    /* ============ TABLE ============ */
+    .table-wrap {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead th {
+      background: var(--surface-2); color: var(--navy);
+      text-align: left; font-weight: 600; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      padding: 10px 14px; border-bottom: 1px solid var(--border);
+    }
+    tbody td {
+      padding: 12px 14px; border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    tbody tr { cursor: pointer; transition: background 0.1s; }
+    tbody tr:hover { background: var(--surface); }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr.empty td {
+      text-align: center; color: var(--text-muted);
+      padding: 36px 14px; cursor: default;
+    }
+    tbody tr.empty:hover { background: transparent; }
+    .patient-name { font-weight: 600; color: var(--navy); }
+    .patient-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ============ PILLS ============ */
+    .pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 10px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .pill-new { background: var(--pill-new-bg); color: var(--pill-new-text); }
+    .pill-reviewed { background: var(--pill-reviewed-bg); color: var(--pill-reviewed-text); }
+    .pill-flagged { background: var(--pill-flagged-bg); color: var(--pill-flagged-text); }
+    .pill-std { background: var(--pill-std-bg); color: var(--pill-std-text); }
+    .pill-wc { background: var(--pill-wc-bg); color: var(--pill-wc-text); }
+    .pill-nf { background: var(--pill-nf-bg); color: var(--pill-nf-text); }
+
+    /* ============ SUBMISSION DETAIL ============ */
+    .detail-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap; margin-bottom: 16px;
+    }
+    .detail-head .left h1 { margin-bottom: 4px; }
+    .detail-head .left .meta {
+      font-size: 13px; color: var(--text-muted);
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+    }
+    .detail-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .detail-grid {
+      display: grid; grid-template-columns: 240px 1fr; gap: 24px;
+    }
+    @media (max-width: 800px) {
+      .detail-grid { grid-template-columns: 1fr; }
+    }
+    .detail-toc {
+      position: sticky; top: 80px; align-self: start;
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .detail-toc a {
+      display: block; padding: 8px 10px; border-radius: var(--radius-sm);
+      text-decoration: none; color: var(--text-soft); font-size: 13px;
+    }
+    .detail-toc a:hover { background: var(--surface); color: var(--navy); }
+    .detail-toc a.active { background: var(--surface-2); color: var(--navy); font-weight: 600; }
+
+    .detail-section {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      box-shadow: var(--shadow-sm); margin-bottom: 16px;
+    }
+    .detail-section h2 {
+      margin-top: 0; font-size: 16px;
+      padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+
+    .field-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 24px;
+    }
+    @media (max-width: 600px) {
+      .field-grid { grid-template-columns: 1fr; }
+    }
+    .field-grid .full { grid-column: 1 / -1; }
+    .read-field {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .read-field label {
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .read-field .value {
+      font-size: 14px; color: var(--navy);
+      padding: 6px 0; border-bottom: 1px dotted var(--border);
+    }
+    .read-field .value.empty { color: var(--text-muted); font-style: italic; }
+
+    .signature-block {
+      background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 16px; margin-top: 12px;
+    }
+    .signature-block .sig-line {
+      font-family: "Brush Script MT", "Lucida Handwriting", cursive;
+      font-size: 26px; color: var(--navy);
+      border-bottom: 1px solid var(--text-soft);
+      padding: 8px 0; margin-bottom: 6px;
+    }
+    .signature-block .sig-meta {
+      font-size: 12px; color: var(--text-muted);
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+
+    .ack-list {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .ack-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .ack-list li:last-child { border-bottom: none; }
+    .ack-list .check {
+      width: 18px; height: 18px; border-radius: 4px;
+      background: var(--success); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 12px; flex-shrink: 0; margin-top: 1px;
+    }
+    .ack-list .ack-meta {
+      font-size: 12px; color: var(--text-muted); margin-top: 2px;
+    }
+
+    .audit-log {
+      font-size: 13px; color: var(--text-soft);
+    }
+    .audit-log .entry {
+      display: grid; grid-template-columns: 160px 1fr;
+      gap: 12px; padding: 6px 0;
+      border-bottom: 1px dotted var(--border);
+    }
+    .audit-log .entry:last-child { border-bottom: none; }
+    .audit-log .when { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      color: var(--cyan); text-decoration: none;
+      font-size: 13px; margin-bottom: 12px;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    /* ============ DROPDOWN (location switcher for super admins) ============ */
+    .multi-loc-note {
+      font-size: 12px; color: var(--text-muted);
+      background: var(--surface-2); padding: 6px 10px; border-radius: var(--radius-sm);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ MOCKUP NAV ============ -->
+<nav id="mockup-nav">
+  <div class="group">
+    <span class="label">Persona:</span>
+    <button data-persona="login" class="active">Logged out</button>
+    <button data-persona="mayra">Mayra (Massapequa)</button>
+    <button data-persona="evelyn">Evelyn (super, 9 loc)</button>
+    <button data-persona="info">admin@nybsj.com (general)</button>
+  </div>
+  <div class="group">
+    <span class="label">Screen:</span>
+    <button data-screen="login" class="active">1. Login</button>
+    <button data-screen="queue">2. Queue</button>
+    <button data-screen="detail">3. Detail</button>
+  </div>
+</nav>
+
+<!-- ============ APP HEADER ============ -->
+<header class="app-header">
+  <div class="brand">
+    <img src="https://nybsj.com/application/files/3817/5467/7386/NYBSJ-144-Logo.png" alt="New York Brain, Spine & Joint" />
+    <div class="brand-text">
+      New York Brain, Spine &amp; Joint
+      <small>Admin Portal</small>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="account" id="account-chip" style="display: none;">
+    <div class="avatar" id="account-avatar">??</div>
+    <div>
+      <div class="who" id="account-who">—</div>
+      <div class="scope" id="account-scope">—</div>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="setPersona('login')">Sign out</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- ============ SCREEN 1: LOGIN ============ -->
+    <section id="screen-login" class="screen active">
+      <div class="narrow">
+        <div class="card">
+          <h1>Sign in to admin portal</h1>
+          <p class="lead">Use your NYBSJ admin credentials. Multi-factor authentication is required.</p>
+
+          <div class="field">
+            <label for="login-email">Email address <span class="req">*</span></label>
+            <input type="email" id="login-email" placeholder="you@nybsj.com" />
+          </div>
+
+          <div class="field">
+            <label for="login-pass">Password <span class="req">*</span></label>
+            <input type="password" id="login-pass" placeholder="••••••••••" />
+            <div class="hint">Forgot password? Contact NYBSJ IT or your practice manager.</div>
+          </div>
+
+          <button class="btn btn-primary btn-block" onclick="handleLogin()">Continue</button>
+
+          <p class="muted" style="text-align: center; margin-top: 18px; font-size: 12px;">
+            Protected health information. Authorized personnel only.
+          </p>
+        </div>
+
+        <p class="muted" style="text-align: center; margin-top: 16px; font-size: 12px;">
+          Use the <strong>Persona</strong> switcher above to demo different admin scopes.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ SCREEN 2: SUBMISSIONS QUEUE ============ -->
+    <section id="screen-queue" class="screen">
+      <div class="queue-head">
+        <div class="left">
+          <h1>Patient intake submissions</h1>
+          <div class="meta" id="queue-meta">—</div>
+        </div>
+        <div class="detail-actions">
+          <button class="btn btn-secondary btn-sm">Export CSV</button>
+          <button class="btn btn-secondary btn-sm">Refresh</button>
+        </div>
+      </div>
+
+      <div class="scope-banner" id="scope-banner">—</div>
+
+      <div class="filters">
+        <span class="filter-label">Filter</span>
+        <select id="filter-location">
+          <option value="">All my locations</option>
+        </select>
+        <select id="filter-claim">
+          <option value="">All claim types</option>
+          <option value="standard">Standard</option>
+          <option value="wc">Workers' Comp</option>
+          <option value="nf">No-Fault</option>
+        </select>
+        <select id="filter-status">
+          <option value="">All statuses</option>
+          <option value="new">New</option>
+          <option value="reviewed">Reviewed</option>
+          <option value="flagged">Flagged</option>
+        </select>
+        <input type="search" class="search" id="filter-search" placeholder="Search by patient name or email..." />
+        <button class="clear" onclick="clearFilters()">Clear</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Location</th>
+              <th>Claim type</th>
+              <th>Submitted</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="queue-body">
+            <!-- populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ SCREEN 3: SUBMISSION DETAIL ============ -->
+    <section id="screen-detail" class="screen">
+      <a href="#" class="back-link" onclick="showScreen('queue'); return false;">&larr; Back to queue</a>
+
+      <div class="detail-head">
+        <div class="left">
+          <h1 id="detail-name">—</h1>
+          <div class="meta" id="detail-meta"></div>
+        </div>
+        <div class="detail-actions">
+          <button class="btn btn-secondary btn-sm">Print / PDF</button>
+          <button class="btn btn-secondary btn-sm">Mark reviewed</button>
+          <button class="btn btn-primary btn-sm">Send to ModMed (Phase 2)</button>
+        </div>
+      </div>
+
+      <div class="detail-grid">
+        <aside class="detail-toc">
+          <a href="#sec-demographics" class="active">Demographics</a>
+          <a href="#sec-insurance">Insurance</a>
+          <a href="#sec-claim">Claim details</a>
+          <a href="#sec-ros">Review of systems</a>
+          <a href="#sec-acks">Acknowledgments &amp; signatures</a>
+          <a href="#sec-audit">Audit log</a>
+        </aside>
+
+        <div class="detail-body">
+
+          <!-- DEMOGRAPHICS -->
+          <div class="detail-section" id="sec-demographics">
+            <h2>Demographics</h2>
+            <div class="field-grid">
+              <div class="read-field"><label>First name</label><div class="value" id="d-first">—</div></div>
+              <div class="read-field"><label>Last name</label><div class="value" id="d-last">—</div></div>
+              <div class="read-field"><label>Date of birth</label><div class="value" id="d-dob">—</div></div>
+              <div class="read-field"><label>Sex</label><div class="value" id="d-sex">—</div></div>
+              <div class="read-field"><label>Phone</label><div class="value" id="d-phone">—</div></div>
+              <div class="read-field"><label>Email</label><div class="value" id="d-email">—</div></div>
+              <div class="read-field full"><label>Address</label><div class="value" id="d-addr">—</div></div>
+              <div class="read-field"><label>Preferred contact</label><div class="value" id="d-contact">—</div></div>
+              <div class="read-field"><label>Preferred language</label><div class="value" id="d-lang">—</div></div>
+            </div>
+          </div>
+
+          <!-- INSURANCE -->
+          <div class="detail-section" id="sec-insurance">
+            <h2>Insurance</h2>
+            <div class="field-grid">
+              <div class="read-field"><label>Carrier</label><div class="value" id="d-ins-carrier">—</div></div>
+              <div class="read-field"><label>Plan / group</label><div class="value" id="d-ins-plan">—</div></div>
+              <div class="read-field"><label>Member ID</label><div class="value" id="d-ins-member">—</div></div>
+              <div class="read-field"><label>Policy holder</label><div class="value" id="d-ins-holder">—</div></div>
+            </div>
+          </div>
+
+          <!-- CLAIM (only shown for WC/NF) -->
+          <div class="detail-section" id="sec-claim">
+            <h2>Claim details</h2>
+            <div id="claim-body">
+              <p class="muted">No claim details (standard appointment).</p>
+            </div>
+          </div>
+
+          <!-- ROS -->
+          <div class="detail-section" id="sec-ros">
+            <h2>Review of systems</h2>
+            <p class="muted" style="font-size: 13px;">Patient-reported. Not a substitute for clinical evaluation.</p>
+            <ul class="ack-list" id="ros-list"></ul>
+          </div>
+
+          <!-- ACKS + SIGS -->
+          <div class="detail-section" id="sec-acks">
+            <h2>Acknowledgments &amp; signatures</h2>
+            <ul class="ack-list" id="ack-list"></ul>
+
+            <h3 style="margin-top: 24px;">Patient signature</h3>
+            <div class="signature-block">
+              <div class="sig-line" id="sig-name">—</div>
+              <div class="sig-meta">
+                <span><strong>Printed:</strong> <span id="sig-printed">—</span></span>
+                <span><strong>Date:</strong> <span id="sig-date">—</span></span>
+                <span><strong>IP:</strong> <span id="sig-ip">—</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AUDIT -->
+          <div class="detail-section" id="sec-audit">
+            <h2>Audit log</h2>
+            <div class="audit-log" id="audit-log"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script>
+  // ============================================================
+  // DATA
+  // ============================================================
+
+  const ALL_LOCATIONS = [
+    { slug: 'great-neck',             name: 'Great Neck' },
+    { slug: 'glen-cove',              name: 'Glen Cove' },
+    { slug: 'massapequa-park',        name: 'Massapequa Park' },
+    { slug: 'west-islip',             name: 'West Islip' },
+    { slug: 'port-jefferson-station', name: 'Port Jefferson Station' },
+    { slug: 'patchogue',              name: 'Patchogue' },
+    { slug: 'riverhead',              name: 'Riverhead' },
+    { slug: 'astoria',                name: 'Astoria' },
+    { slug: 'north-babylon',          name: 'North Babylon' },
+    { slug: 'newark',                 name: 'Newark' },
+    { slug: 'colonia',                name: 'Colonia' },
+    { slug: 'brooklyn',               name: 'Brooklyn (deferred)' },
+    { slug: 'huntington-station',     name: 'Huntington Station (deferred)' },
+  ];
+  const LOC_NAME = Object.fromEntries(ALL_LOCATIONS.map(l => [l.slug, l.name]));
+
+  // Personas: tier + which locations they can see
+  const PERSONAS = {
+    mayra: {
+      who: 'Mayra Bonilla',
+      email: 'mayra@nybsj.com',
+      tier: 'Single-location',
+      avatarInitials: 'MB',
+      allowedLocations: ['massapequa-park'],
+    },
+    evelyn: {
+      who: 'Evelyn Rojas',
+      email: 'evelyn@nybsj.com',
+      tier: 'Multi-location super-admin',
+      avatarInitials: 'ER',
+      allowedLocations: [
+        'great-neck', 'glen-cove', 'port-jefferson-station',
+        'patchogue', 'riverhead', 'astoria',
+        'north-babylon', 'newark', 'colonia',
+      ],
+    },
+    info: {
+      who: 'NYBSJ General Admin',
+      email: 'admin@nybsj.com',
+      tier: 'General admin (all locations)',
+      avatarInitials: 'A',
+      allowedLocations: ['*'],
+    },
+  };
+
+  // Mock submissions across all locations
+  const SUBMISSIONS = [
+    { id: 'sub_001', first: 'Maria',     last: 'Hernandez', email: 'mhernandez@example.com', phone: '(516) 555-0142', dob: '1978-03-22', sex: 'Female', addr: '142 Sunrise Hwy, Massapequa Park, NY 11762', contact: 'Phone', lang: 'English', location: 'massapequa-park',        claim: 'standard', status: 'new',      submittedAt: '2026-04-30 14:18 ET', ins: { carrier: 'Aetna',           plan: 'Choice POS II / GRP-99213', member: 'AET-887721', holder: 'Self' } },
+    { id: 'sub_002', first: 'Robert',    last: 'Patel',     email: 'rpatel@example.com',     phone: '(516) 555-0287', dob: '1965-11-09', sex: 'Male',   addr: '290 Community Dr E, Great Neck, NY 11021',     contact: 'Email', lang: 'English', location: 'great-neck',              claim: 'standard', status: 'reviewed', submittedAt: '2026-04-30 11:02 ET', ins: { carrier: 'United HC',       plan: 'Choice Plus / 442-001',     member: 'UHC-552310', holder: 'Self' } },
+    { id: 'sub_003', first: 'Anita',     last: 'Singh',     email: 'asingh@example.com',     phone: '(631) 555-0331', dob: '1991-07-14', sex: 'Female', addr: '160 Old Country Rd, Riverhead, NY 11901',      contact: 'Text',  lang: 'English', location: 'riverhead',               claim: 'wc',       status: 'new',      submittedAt: '2026-04-30 09:45 ET', ins: { carrier: 'NYSIF (Workers Comp)', plan: 'WC Claim',             member: 'WC-NY-882-110', holder: 'Self' } },
+    { id: 'sub_004', first: 'Kenji',     last: 'Watanabe',  email: 'kwatanabe@example.com',  phone: '(631) 555-0410', dob: '1983-02-28', sex: 'Male',   addr: '1175 Montauk Hwy, West Islip, NY 11795',       contact: 'Phone', lang: 'English', location: 'west-islip',              claim: 'nf',       status: 'flagged',  submittedAt: '2026-04-29 16:30 ET', ins: { carrier: 'GEICO No-Fault',  plan: 'PIP / Auto Claim',          member: 'NF-GE-441902', holder: 'Self' } },
+    { id: 'sub_005', first: 'Latoya',    last: 'Jefferson', email: 'ljefferson@example.com', phone: '(516) 555-0509', dob: '1972-09-16', sex: 'Female', addr: '189A Forest Ave, Glen Cove, NY 11542',         contact: 'Phone', lang: 'English', location: 'glen-cove',               claim: 'standard', status: 'reviewed', submittedAt: '2026-04-29 14:00 ET', ins: { carrier: 'Empire BCBS',     plan: 'PPO / GRP-3329',            member: 'EBC-220115', holder: 'Self' } },
+    { id: 'sub_006', first: 'Carlos',    last: 'Vega',      email: 'cvega@example.com',      phone: '(631) 555-0612', dob: '1988-12-04', sex: 'Male',   addr: '680 NY-112 Suite C, Patchogue, NY 11772',      contact: 'Text',  lang: 'Spanish', location: 'patchogue',               claim: 'standard', status: 'new',      submittedAt: '2026-04-29 10:22 ET', ins: { carrier: 'Cigna',           plan: 'Open Access Plus',          member: 'CIG-771104', holder: 'Self' } },
+    { id: 'sub_007', first: 'Diana',     last: 'Okafor',    email: 'dokafor@example.com',    phone: '(631) 555-0721', dob: '1956-05-19', sex: 'Female', addr: '1500 NY-112, Bldg 8, Port Jefferson, NY 11776', contact: 'Phone', lang: 'English', location: 'port-jefferson-station',  claim: 'standard', status: 'reviewed', submittedAt: '2026-04-29 09:15 ET', ins: { carrier: 'Medicare',        plan: 'Part B',                    member: 'MED-228810', holder: 'Self' } },
+    { id: 'sub_008', first: 'Brian',     last: 'Choi',      email: 'bchoi@example.com',      phone: '(718) 555-0833', dob: '1995-08-30', sex: 'Male',   addr: '21-15 Astoria Blvd, Astoria, NY 11102',        contact: 'Email', lang: 'English', location: 'astoria',                 claim: 'wc',       status: 'new',      submittedAt: '2026-04-28 17:50 ET', ins: { carrier: 'Travelers WC',    plan: 'WC Claim',                  member: 'WC-TR-118827', holder: 'Self' } },
+    { id: 'sub_009', first: 'Sofia',     last: 'Mendoza',   email: 'smendoza@example.com',   phone: '(908) 555-0944', dob: '1980-01-25', sex: 'Female', addr: '15 Prospect Ln, Colonia, NJ 07067',            contact: 'Phone', lang: 'Spanish', location: 'colonia',                 claim: 'standard', status: 'new',      submittedAt: '2026-04-28 13:08 ET', ins: { carrier: 'Horizon BCBS NJ', plan: 'Direct Access',             member: 'HBC-559210', holder: 'Self' } },
+    { id: 'sub_010', first: 'Marcus',    last: 'Reilly',    email: 'mreilly@example.com',    phone: '(631) 555-1055', dob: '1969-04-11', sex: 'Male',   addr: '450 Deer Park Ave, North Babylon, NY 11703',   contact: 'Phone', lang: 'English', location: 'north-babylon',           claim: 'nf',       status: 'reviewed', submittedAt: '2026-04-28 10:40 ET', ins: { carrier: 'Allstate No-Fault', plan: 'PIP / Auto Claim',        member: 'NF-AL-994412', holder: 'Self' } },
+    { id: 'sub_011', first: 'Priya',     last: 'Ramaswamy', email: 'pramaswamy@example.com', phone: '(516) 555-1166', dob: '1986-10-07', sex: 'Female', addr: '450 Sunrise Hwy, Massapequa Park, NY 11762',   contact: 'Email', lang: 'English', location: 'massapequa-park',         claim: 'standard', status: 'reviewed', submittedAt: '2026-04-27 15:20 ET', ins: { carrier: 'Oxford',          plan: 'Liberty Network',           member: 'OX-330221', holder: 'Self' } },
+    { id: 'sub_012', first: 'James',     last: 'O’Connor', email: 'joconnor@example.com',phone: '(908) 555-1277', dob: '1975-06-18', sex: 'Male',   addr: '12 Park St, Newark, NJ 07102',                 contact: 'Phone', lang: 'English', location: 'newark',                  claim: 'wc',       status: 'flagged',  submittedAt: '2026-04-27 11:55 ET', ins: { carrier: 'NJ Manufacturers WC', plan: 'WC Claim',              member: 'WC-NJM-660531', holder: 'Self' } },
+  ];
+
+  // Per-submission ROS findings (sample subset)
+  const ROS_SAMPLE = [
+    'Lower back pain (chronic, &gt; 6 months)',
+    'Numbness in left leg, intermittent',
+    'No shortness of breath',
+    'No chest pain',
+    'Sleep disturbance (frequent waking due to pain)',
+    'No history of seizures',
+    'Reports anxiety related to pain',
+  ];
+
+  const ACKS = [
+    { id: 'consent',   label: 'Consent for Treatment',                    version: 'v2026-04-30' },
+    { id: 'npp',       label: 'Notice of Privacy Practices acknowledged',  version: 'pending'      },
+    { id: 'aob',       label: 'Assignment of Benefits',                    version: 'v2026-04-15'  },
+    { id: 'gop',       label: 'Guarantee of Payment',                      version: 'v2026-04-15'  },
+    { id: 'noshow',    label: 'No-Show / Cancellation Policy',             version: 'v2026-04-15'  },
+  ];
+
+  // ============================================================
+  // STATE
+  // ============================================================
+  let currentPersona = null;            // null = logged out
+  let currentScreen = 'login';
+  let currentSubmissionId = SUBMISSIONS[0].id;
+
+  // ============================================================
+  // HELPERS
+  // ============================================================
+  function visibleSubmissions() {
+    if (!currentPersona) return [];
+    const allowed = PERSONAS[currentPersona].allowedLocations;
+    if (allowed.includes('*')) return SUBMISSIONS;
+    return SUBMISSIONS.filter(s => allowed.includes(s.location));
+  }
+
+  function fmtClaim(c) {
+    if (c === 'wc') return '<span class="pill pill-wc">Workers’ Comp</span>';
+    if (c === 'nf') return '<span class="pill pill-nf">No-Fault</span>';
+    return '<span class="pill pill-std">Standard</span>';
+  }
+  function fmtStatus(s) {
+    if (s === 'reviewed') return '<span class="pill pill-reviewed">Reviewed</span>';
+    if (s === 'flagged')  return '<span class="pill pill-flagged">Flagged</span>';
+    return '<span class="pill pill-new">New</span>';
+  }
+
+  // ============================================================
+  // RENDER: PERSONA + ACCOUNT CHIP
+  // ============================================================
+  function setPersona(personaKey) {
+    if (personaKey === 'login') {
+      currentPersona = null;
+      document.getElementById('account-chip').style.display = 'none';
+      showScreen('login');
+    } else {
+      currentPersona = personaKey;
+      const p = PERSONAS[personaKey];
+      document.getElementById('account-chip').style.display = 'flex';
+      document.getElementById('account-avatar').textContent = p.avatarInitials;
+      document.getElementById('account-who').textContent = p.who;
+      document.getElementById('account-scope').textContent = p.tier;
+      showScreen('queue');
+    }
+    // sync persona buttons
+    document.querySelectorAll('#mockup-nav button[data-persona]').forEach(b => {
+      b.classList.toggle('active', b.dataset.persona === (personaKey || 'login'));
+    });
+  }
+
+  function handleLogin() {
+    // Mock: just route to Mayra by default if no persona chosen yet.
+    if (!currentPersona) setPersona('mayra');
+    else showScreen('queue');
+  }
+
+  // ============================================================
+  // RENDER: QUEUE
+  // ============================================================
+  function renderQueue() {
+    if (!currentPersona) { setPersona('login'); return; }
+
+    const p = PERSONAS[currentPersona];
+    const allowed = p.allowedLocations;
+    const subs = visibleSubmissions();
+
+    // Scope banner
+    const banner = document.getElementById('scope-banner');
+    if (allowed.includes('*')) {
+      banner.className = 'scope-banner info-strong';
+      banner.innerHTML = '★ <strong>General admin scope:</strong> you can see submissions from <strong>all NYBSJ locations</strong> (' + (ALL_LOCATIONS.length) + ' total, including deferred). Platform-operator account.';
+    } else if (allowed.length === 1) {
+      banner.className = 'scope-banner info';
+      banner.innerHTML = '● <strong>Single-location scope:</strong> you can only see submissions for <strong>' + LOC_NAME[allowed[0]] + '</strong>.';
+    } else {
+      banner.className = 'scope-banner info';
+      banner.innerHTML = '● <strong>Multi-location scope:</strong> you can see submissions for <strong>' + allowed.length + ' locations</strong> &mdash; ' + allowed.map(s => LOC_NAME[s]).join(', ') + '.';
+    }
+
+    // Meta line
+    document.getElementById('queue-meta').textContent =
+      subs.length + (subs.length === 1 ? ' submission' : ' submissions') + ' visible to you';
+
+    // Location filter dropdown
+    const sel = document.getElementById('filter-location');
+    sel.innerHTML = '';
+    sel.appendChild(new Option('All my locations', ''));
+    const visibleLocations = allowed.includes('*')
+      ? ALL_LOCATIONS.map(l => l.slug)
+      : allowed;
+    visibleLocations.forEach(slug => {
+      sel.appendChild(new Option(LOC_NAME[slug], slug));
+    });
+
+    // Apply filters + render rows
+    applyQueueFilters();
+  }
+
+  function applyQueueFilters() {
+    const loc    = document.getElementById('filter-location').value;
+    const claim  = document.getElementById('filter-claim').value;
+    const status = document.getElementById('filter-status').value;
+    const search = document.getElementById('filter-search').value.toLowerCase().trim();
+
+    let rows = visibleSubmissions();
+    if (loc)    rows = rows.filter(s => s.location === loc);
+    if (claim)  rows = rows.filter(s => s.claim === claim);
+    if (status) rows = rows.filter(s => s.status === status);
+    if (search) rows = rows.filter(s =>
+      (s.first + ' ' + s.last).toLowerCase().includes(search) ||
+      s.email.toLowerCase().includes(search)
+    );
+
+    const body = document.getElementById('queue-body');
+    if (!rows.length) {
+      body.innerHTML = '<tr class="empty"><td colspan="6">No submissions match your filters.</td></tr>';
+      return;
+    }
+    body.innerHTML = rows.map(s => `
+      <tr onclick="openSubmission('${s.id}')">
+        <td>
+          <div class="patient-name">${s.first} ${s.last}</div>
+          <div class="patient-sub">${s.email}</div>
+        </td>
+        <td>${LOC_NAME[s.location]}</td>
+        <td>${fmtClaim(s.claim)}</td>
+        <td>${s.submittedAt}</td>
+        <td>${fmtStatus(s.status)}</td>
+        <td><button class="btn btn-ghost btn-sm">View &rarr;</button></td>
+      </tr>
+    `).join('');
+  }
+
+  function clearFilters() {
+    document.getElementById('filter-location').value = '';
+    document.getElementById('filter-claim').value = '';
+    document.getElementById('filter-status').value = '';
+    document.getElementById('filter-search').value = '';
+    applyQueueFilters();
+  }
+
+  // ============================================================
+  // RENDER: DETAIL
+  // ============================================================
+  function openSubmission(id) {
+    currentSubmissionId = id;
+    renderDetail();
+    showScreen('detail');
+  }
+
+  function renderDetail() {
+    const s = SUBMISSIONS.find(x => x.id === currentSubmissionId);
+    if (!s) return;
+
+    // Permission guard: if persona can't see this location, redirect to queue
+    if (currentPersona) {
+      const allowed = PERSONAS[currentPersona].allowedLocations;
+      if (!allowed.includes('*') && !allowed.includes(s.location)) {
+        showScreen('queue');
+        return;
+      }
+    }
+
+    document.getElementById('detail-name').textContent = s.first + ' ' + s.last;
+    document.getElementById('detail-meta').innerHTML =
+      `<span><strong>${LOC_NAME[s.location]}</strong></span>` +
+      `<span>${fmtClaim(s.claim)}</span>` +
+      `<span>${fmtStatus(s.status)}</span>` +
+      `<span>Submitted ${s.submittedAt}</span>` +
+      `<span>ID: ${s.id}</span>`;
+
+    document.getElementById('d-first').textContent = s.first;
+    document.getElementById('d-last').textContent  = s.last;
+    document.getElementById('d-dob').textContent   = s.dob;
+    document.getElementById('d-sex').textContent   = s.sex;
+    document.getElementById('d-phone').textContent = s.phone;
+    document.getElementById('d-email').textContent = s.email;
+    document.getElementById('d-addr').textContent  = s.addr;
+    document.getElementById('d-contact').textContent = s.contact;
+    document.getElementById('d-lang').textContent  = s.lang;
+
+    document.getElementById('d-ins-carrier').textContent = s.ins.carrier;
+    document.getElementById('d-ins-plan').textContent    = s.ins.plan;
+    document.getElementById('d-ins-member').textContent  = s.ins.member;
+    document.getElementById('d-ins-holder').textContent  = s.ins.holder;
+
+    // Claim section
+    const claimBody = document.getElementById('claim-body');
+    if (s.claim === 'wc') {
+      claimBody.innerHTML = `
+        <div class="field-grid">
+          <div class="read-field"><label>Claim type</label><div class="value">Workers' Compensation</div></div>
+          <div class="read-field"><label>Date of injury</label><div class="value">2026-04-12</div></div>
+          <div class="read-field"><label>Employer</label><div class="value">Empire State Logistics LLC</div></div>
+          <div class="read-field"><label>Carrier (WC)</label><div class="value">${s.ins.carrier}</div></div>
+          <div class="read-field"><label>Claim #</label><div class="value">${s.ins.member}</div></div>
+          <div class="read-field"><label>Adjuster</label><div class="value">D. Romero (212-555-0190)</div></div>
+        </div>
+      `;
+    } else if (s.claim === 'nf') {
+      claimBody.innerHTML = `
+        <div class="field-grid">
+          <div class="read-field"><label>Claim type</label><div class="value">No-Fault / Auto</div></div>
+          <div class="read-field"><label>Date of accident</label><div class="value">2026-04-09</div></div>
+          <div class="read-field"><label>Carrier (No-Fault)</label><div class="value">${s.ins.carrier}</div></div>
+          <div class="read-field"><label>Claim #</label><div class="value">${s.ins.member}</div></div>
+          <div class="read-field"><label>Attorney</label><div class="value">Patel &amp; Associates</div></div>
+          <div class="read-field"><label>Police report #</label><div class="value">SCPD-2026-118827</div></div>
+        </div>
+      `;
+    } else {
+      claimBody.innerHTML = '<p class="muted">No claim details (standard appointment).</p>';
+    }
+
+    // ROS
+    document.getElementById('ros-list').innerHTML = ROS_SAMPLE.map(item =>
+      `<li><span class="check">✓</span><div>${item}</div></li>`
+    ).join('');
+
+    // Acks + sigs
+    document.getElementById('ack-list').innerHTML = ACKS.map(a =>
+      `<li>
+        <span class="check">✓</span>
+        <div>
+          <div>${a.label}</div>
+          <div class="ack-meta">${a.version} &middot; signed ${s.submittedAt}</div>
+        </div>
+      </li>`
+    ).join('');
+
+    document.getElementById('sig-name').textContent = s.first + ' ' + s.last;
+    document.getElementById('sig-printed').textContent = (s.first + ' ' + s.last).toUpperCase();
+    document.getElementById('sig-date').textContent = s.submittedAt;
+    document.getElementById('sig-ip').textContent = '198.51.100.' + (40 + (s.id.charCodeAt(s.id.length - 1) % 80));
+
+    // Audit log
+    document.getElementById('audit-log').innerHTML = `
+      <div class="entry"><span class="when">${s.submittedAt}</span><span>Patient submitted intake (magic-link verified)</span></div>
+      <div class="entry"><span class="when">${s.submittedAt}</span><span>5 acknowledgments recorded with timestamps</span></div>
+      ${s.status === 'reviewed' ? `<div class="entry"><span class="when">2026-04-30 16:02 ET</span><span>Reviewed by ${PERSONAS.evelyn.email}</span></div>` : ''}
+      ${s.status === 'flagged' ? `<div class="entry"><span class="when">2026-04-30 16:14 ET</span><span>Flagged for follow-up by ${PERSONAS.evelyn.email}</span></div>` : ''}
+    `;
+  }
+
+  // ============================================================
+  // SCREEN ROUTING
+  // ============================================================
+  function showScreen(name) {
+    currentScreen = name;
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.querySelectorAll('#mockup-nav button[data-screen]').forEach(b => {
+      b.classList.toggle('active', b.dataset.screen === name);
+    });
+    if (name === 'queue')  renderQueue();
+    if (name === 'detail') renderDetail();
+    window.scrollTo(0, 0);
+  }
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  document.querySelectorAll('#mockup-nav button[data-persona]').forEach(btn => {
+    btn.addEventListener('click', () => setPersona(btn.dataset.persona));
+  });
+  document.querySelectorAll('#mockup-nav button[data-screen]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!currentPersona && btn.dataset.screen !== 'login') {
+        // Auto-promote to Mayra so screens are usable from the start.
+        setPersona('mayra');
+      }
+      showScreen(btn.dataset.screen);
+    });
+  });
+  ['filter-location', 'filter-claim', 'filter-status', 'filter-search'].forEach(id => {
+    document.getElementById(id).addEventListener('input', applyQueueFilters);
+  });
+
+  // Start logged out on the login screen.
+  setPersona('login');
+</script>
+
+</body>
+</html>
