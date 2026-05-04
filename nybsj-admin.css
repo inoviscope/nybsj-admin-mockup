@@ -1,0 +1,64 @@
+/* ============================================================
+   NYBSJ Admin Portal — Brand Override Stylesheet
+   Apply AFTER the developer's own inline <style> block.
+
+   Mirrors the brand pass applied to the patient intake mockup
+   (Brian Greer / GoImage). Same approach: override CSS custom
+   properties + fonts, leave layout untouched.
+
+   Fonts:    Poppins (headings) + Lato (body) — nybsj.com
+   Accent:   #1265a8  rgb(18, 101, 168)       — nybsj.com blue
+   Navy:     #1a2d45                           — nybsj.com dark
+   ============================================================ */
+
+/* ── 1. Load nybsj.com fonts ──────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap');
+
+/* ── 2. Override the developer's CSS variables ────────────── */
+:root {
+  --navy:      #1a2d45;
+  --navy-soft: #152338;
+
+  --cyan:        #1265a8;
+  --cyan-bright: #0f5490;
+
+  --surface:   #f0f2f5;
+  --surface-2: #e8edf3;
+}
+
+/* ── 3. Fonts ─────────────────────────────────────────────── */
+html, body {
+  font-family: 'Lato', 'Segoe UI', Arial, sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+}
+
+/* ── 4. H1 color — nybsj.com blue ─────────────────────────── */
+h1 {
+  color: #1265a8;
+}
+
+/* ── 5. Primary buttons — nybsj.com blue ──────────────────── */
+.btn-primary {
+  background: #1265a8;
+  border-color: #1265a8;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #0f5490;
+  border-color: #0f5490;
+}
+
+/* ── 6. Input focus ring ──────────────────────────────────── */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #1265a8;
+  box-shadow: 0 0 0 3px rgba(18, 101, 168, 0.18);
+}
+
+/* ── 7. Mockup nav — suppress in production ───────────────── */
+/* #mockup-nav { display: none; } */
