@@ -691,13 +691,21 @@
     'Reports anxiety related to pain',
   ];
 
-  const ACKS = [
-    { id: 'consent',   label: 'Consent for Treatment',                    version: 'v2026-04-30' },
-    { id: 'npp',       label: 'Notice of Privacy Practices acknowledged',  version: 'pending'      },
-    { id: 'aob',       label: 'Assignment of Benefits',                    version: 'v2026-04-15'  },
-    { id: 'gop',       label: 'Guarantee of Payment',                      version: 'v2026-04-15'  },
-    { id: 'noshow',    label: 'No-Show / Cancellation Policy',             version: 'v2026-04-15'  },
+  const ACKS_BASE = [
+    { id: 'consent',   label: 'Consent for Treatment',                                                version: 'v2026-04-30' },
+    { id: 'hipaadisc', label: 'Authorization to Disclose Protected Health Information',               version: 'v2026-05-04' },
+    { id: 'npp',       label: 'Notice of Privacy Practices acknowledged',                              version: 'pending'      },
+    { id: 'aob',       label: 'Assignment of Benefits',                                                version: 'v2026-04-15'  },
+    { id: 'gop',       label: 'Guarantee of Payment',                                                  version: 'v2026-04-15'  },
+    { id: 'noshow',    label: 'No-Show and Surgery Cancellation Policy',                               version: 'v2026-05-05'  },
   ];
+  const ACKS_NF_EXTRA = [
+    { id: 'lien',      label: 'Lien Assignment Agreement (No-Fault only)',                             version: 'v2026-04-15'  },
+    { id: 'nfaob',     label: 'NYS Motor Vehicle No-Fault AOB (No-Fault only)',                        version: 'v2026-05-05'  },
+  ];
+  function acksForClaim(c) {
+    return c === 'nf' ? ACKS_BASE.concat(ACKS_NF_EXTRA) : ACKS_BASE;
+  }
 
   // ============================================================
   // STATE
@@ -920,7 +928,8 @@
     ).join('');
 
     // Acks + sigs
-    document.getElementById('ack-list').innerHTML = ACKS.map(a =>
+    const acks = acksForClaim(s.claim);
+    document.getElementById('ack-list').innerHTML = acks.map(a =>
       `<li>
         <span class="check">✓</span>
         <div>
@@ -938,7 +947,7 @@
     // Audit log
     document.getElementById('audit-log').innerHTML = `
       <div class="entry"><span class="when">${s.submittedAt}</span><span>Patient submitted intake (magic-link verified)</span></div>
-      <div class="entry"><span class="when">${s.submittedAt}</span><span>5 acknowledgments recorded with timestamps</span></div>
+      <div class="entry"><span class="when">${s.submittedAt}</span><span>${acks.length} acknowledgments recorded with timestamps</span></div>
       ${s.status === 'reviewed' ? `<div class="entry"><span class="when">2026-04-30 16:02 ET</span><span>Reviewed by ${PERSONAS.evelyn.email}</span></div>` : ''}
       ${s.status === 'flagged' ? `<div class="entry"><span class="when">2026-04-30 16:14 ET</span><span>Flagged for follow-up by ${PERSONAS.evelyn.email}</span></div>` : ''}
     `;
