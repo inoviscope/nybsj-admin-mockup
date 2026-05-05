@@ -987,7 +987,7 @@
     document.getElementById(id).addEventListener('input', applyQueueFilters);
   });
 
-  // Detail TOC: highlight on click + scroll-spy (topmost section above 110px from top wins)
+  // Detail TOC: explicit click scroll + scroll-spy
   (function () {
     const toc = document.querySelector('.detail-toc');
     if (!toc) return;
@@ -998,17 +998,27 @@
     const setActive = (id) => links.forEach(a =>
       a.classList.toggle('active', a.getAttribute('href') === '#' + id)
     );
+    function navOffset() {
+      const nav = document.getElementById('mockup-nav');
+      return (nav ? nav.offsetHeight : 0) + 16;
+    }
     let suppressUntil = 0;
-    links.forEach(a => a.addEventListener('click', () => {
-      setActive(a.getAttribute('href').slice(1));
-      suppressUntil = Date.now() + 600;
+    links.forEach(a => a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      const top = target.getBoundingClientRect().top + window.scrollY - navOffset();
+      window.scrollTo({ top, behavior: 'smooth' });
+      setActive(id);
+      suppressUntil = Date.now() + 800;
     }));
     function updateActive() {
       if (Date.now() < suppressUntil) return;
-      const offset = 110;
+      const threshold = navOffset() + 24;
       let activeId = sections[0]?.id;
       for (const s of sections) {
-        if (s.getBoundingClientRect().top - offset <= 0) activeId = s.id;
+        if (s.getBoundingClientRect().top - threshold <= 0) activeId = s.id;
       }
       if (activeId) setActive(activeId);
     }
