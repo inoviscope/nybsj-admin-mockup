@@ -299,6 +299,7 @@
       background: #fff; border: 1px solid var(--border);
       border-radius: var(--radius); padding: 24px;
       box-shadow: var(--shadow-sm); margin-bottom: 16px;
+      scroll-margin-top: 90px;
     }
     .detail-section h2 {
       margin-top: 0; font-size: 16px;
@@ -986,27 +987,33 @@
     document.getElementById(id).addEventListener('input', applyQueueFilters);
   });
 
-  // Detail TOC: highlight on click + scroll-spy
+  // Detail TOC: highlight on click + scroll-spy (topmost section above 110px from top wins)
   (function () {
     const toc = document.querySelector('.detail-toc');
     if (!toc) return;
     const links = Array.from(toc.querySelectorAll('a'));
-    const setActive = (id) => links.forEach(a =>
-      a.classList.toggle('active', a.getAttribute('href') === '#' + id)
-    );
-    links.forEach(a => a.addEventListener('click', () => {
-      setActive(a.getAttribute('href').slice(1));
-    }));
     const sections = links
       .map(a => document.getElementById(a.getAttribute('href').slice(1)))
       .filter(Boolean);
-    const io = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) setActive(visible.target.id);
-    }, { rootMargin: '-20% 0px -50% 0px', threshold: [0, 0.25, 0.5, 1] });
-    sections.forEach(s => io.observe(s));
+    const setActive = (id) => links.forEach(a =>
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id)
+    );
+    let suppressUntil = 0;
+    links.forEach(a => a.addEventListener('click', () => {
+      setActive(a.getAttribute('href').slice(1));
+      suppressUntil = Date.now() + 600;
+    }));
+    function updateActive() {
+      if (Date.now() < suppressUntil) return;
+      const offset = 110;
+      let activeId = sections[0]?.id;
+      for (const s of sections) {
+        if (s.getBoundingClientRect().top - offset <= 0) activeId = s.id;
+      }
+      if (activeId) setActive(activeId);
+    }
+    window.addEventListener('scroll', updateActive, { passive: true });
+    window.addEventListener('resize', updateActive);
   })();
 
   // Start logged out on the login screen.
