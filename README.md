@@ -20,8 +20,8 @@ The mockup demonstrates all three admin tiers via a persona switcher in the top 
 
 | Tier | Demo persona | Locations visible |
 |---|---|---|
-| Single-location | Mayra Bonilla (`mayra@nybsj.com`) | Massapequa Park only |
-| Multi-location super-admin | Evelyn Rojas (`evelyn@nybsj.com`) | 9 locations |
+| Single-location | Dana Whitfield (`dana@example.com`) | Massapequa Park only |
+| Multi-location super-admin | Robin Alvarez (`robin@example.com`) | 9 locations |
 | General admin | `admin@nybsj.com` (placeholder, pending NYBSJ confirmation) | All locations (incl. deferred) |
 
 Patient submissions are mock data only. No real PHI.

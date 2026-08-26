@@ -394,8 +394,8 @@
   <div class="group">
     <span class="label">Persona:</span>
     <button data-persona="login" class="active">Logged out</button>
-    <button data-persona="mayra">Mayra (Massapequa)</button>
-    <button data-persona="evelyn">Evelyn (super, 9 loc)</button>
+    <button data-persona="dana">Dana (Massapequa)</button>
+    <button data-persona="robin">Robin (super, 9 loc)</button>
     <button data-persona="info">admin@nybsj.com (general)</button>
   </div>
   <div class="group">
@@ -637,18 +637,18 @@
 
   // Personas: tier + which locations they can see
   const PERSONAS = {
-    mayra: {
-      who: 'Mayra Bonilla',
-      email: 'mayra@nybsj.com',
+    dana: {
+      who: 'Dana Whitfield',
+      email: 'dana@example.com',
       tier: 'Single-location',
-      avatarInitials: 'MB',
+      avatarInitials: 'DW',
       allowedLocations: ['massapequa-park'],
     },
-    evelyn: {
-      who: 'Evelyn Rojas',
-      email: 'evelyn@nybsj.com',
+    robin: {
+      who: 'Robin Alvarez',
+      email: 'robin@example.com',
       tier: 'Multi-location super-admin',
-      avatarInitials: 'ER',
+      avatarInitials: 'RA',
       allowedLocations: [
         'great-neck', 'glen-cove', 'port-jefferson-station',
         'patchogue', 'riverhead', 'astoria',
@@ -759,8 +759,8 @@
   }
 
   function handleLogin() {
-    // Mock: just route to Mayra by default if no persona chosen yet.
-    if (!currentPersona) setPersona('mayra');
+    // Mock: just route to Dana by default if no persona chosen yet.
+    if (!currentPersona) setPersona('dana');
     else showScreen('queue');
   }
 
@@ -948,8 +948,8 @@
     document.getElementById('audit-log').innerHTML = `
       <div class="entry"><span class="when">${s.submittedAt}</span><span>Patient submitted intake (magic-link verified)</span></div>
       <div class="entry"><span class="when">${s.submittedAt}</span><span>${acks.length} acknowledgments recorded with timestamps</span></div>
-      ${s.status === 'reviewed' ? `<div class="entry"><span class="when">2026-04-30 16:02 ET</span><span>Reviewed by ${PERSONAS.evelyn.email}</span></div>` : ''}
-      ${s.status === 'flagged' ? `<div class="entry"><span class="when">2026-04-30 16:14 ET</span><span>Flagged for follow-up by ${PERSONAS.evelyn.email}</span></div>` : ''}
+      ${s.status === 'reviewed' ? `<div class="entry"><span class="when">2026-04-30 16:02 ET</span><span>Reviewed by ${PERSONAS.robin.email}</span></div>` : ''}
+      ${s.status === 'flagged' ? `<div class="entry"><span class="when">2026-04-30 16:14 ET</span><span>Flagged for follow-up by ${PERSONAS.robin.email}</span></div>` : ''}
     `;
   }
 
@@ -977,8 +977,8 @@
   document.querySelectorAll('#mockup-nav button[data-screen]').forEach(btn => {
     btn.addEventListener('click', () => {
       if (!currentPersona && btn.dataset.screen !== 'login') {
-        // Auto-promote to Mayra so screens are usable from the start.
-        setPersona('mayra');
+        // Auto-promote to Dana so screens are usable from the start.
+        setPersona('dana');
       }
       showScreen(btn.dataset.screen);
     });
